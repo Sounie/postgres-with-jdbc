@@ -6,6 +6,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.sql.*;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,6 +16,7 @@ class DependenciesRunnerTests {
     private static final String DB_USER = "db-user";
     private static final String PASSWORD = "aBcDeFg54321";
 
+    // Annotation applied to hook into TestContainers lifecycle management.
     @Container
     private static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres")
             .withDatabaseName("sampleDB")
@@ -32,15 +34,19 @@ class DependenciesRunnerTests {
         try (Connection connection = DriverManager.getConnection(jdbcUrl, DB_USER, PASSWORD)) {
             createTable(connection);
 
-            insertRow(connection);
+            UUID id = UUID.randomUUID();
+            insertRow(connection, id, "First event", 1);
 
-            readRow(connection);
+            readRow(connection, id);
 
-            getMetadata(connection);
+            outputMetadata(connection);
         }
     }
 
-    private void getMetadata(Connection connection) throws SQLException {
+    private void outputMetadata(Connection connection) throws SQLException {
+        /* In a real environment metadata may be useful for ensuring that the provisioned resource
+        that is connected to has the expected capabilities.
+        */
         DatabaseMetaData metadata = connection.getMetaData();
 
         int maxConnections = metadata.getMaxConnections();
@@ -53,7 +59,7 @@ class DependenciesRunnerTests {
         System.out.println("Time date functions: " + timeDateFunctions);
     }
 
-    private void readRow(Connection connection) throws SQLException {
+    private void readRow(Connection connection, UUID expectedId) throws SQLException {
         try (PreparedStatement readStatement = connection.prepareStatement("SELECT * from event")) {
             // assert that one result and has name of "First event"
             readStatement.execute();
@@ -61,8 +67,8 @@ class DependenciesRunnerTests {
             try (ResultSet resultSet = readStatement.getResultSet()) {
                 boolean firstResult = resultSet.next();
                 assertThat(firstResult).isTrue();
-                int id = resultSet.getInt("id");
-                assertThat(id).isGreaterThan(0);
+                UUID id = resultSet.getObject("id", UUID.class);
+                assertThat(id).isEqualTo(expectedId);
                 assertThat(resultSet.getString("name")).isEqualTo("First event");
 
                 // Verifying that no unexpected additional results are returned.
@@ -72,9 +78,11 @@ class DependenciesRunnerTests {
         }
     }
 
-    private void insertRow(Connection connection) throws SQLException {
-        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO event (name) VALUES (?)")) {
-            statement.setString(1, "First event");
+    private void insertRow(Connection connection, UUID id, String name, int version) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO event (id, name, version) VALUES (?, ?, ?)")) {
+            statement.setObject(1, id);
+            statement.setString(2, name);
+            statement.setInt(3, version);
 
             int rowCount = statement.executeUpdate();
             assertThat(rowCount).describedAs("Insert should make one row").isEqualTo(1);
@@ -83,8 +91,9 @@ class DependenciesRunnerTests {
 
     private static void createTable(Connection connection) throws SQLException {
         try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("CREATE TABLE event (id serial PRIMARY KEY, " +
-                    "name varchar(255) NOT NULL)");
+            statement.executeUpdate("CREATE TABLE event (id UUID PRIMARY KEY, " +
+                    "name varchar(255) NOT NULL," +
+                    "version bigint NOT NULL DEFAULT 0)");
         }
     }
 }
