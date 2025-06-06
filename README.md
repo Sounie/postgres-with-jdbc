@@ -1,3 +1,3 @@
 Dabbling with Postgres from Java.
 
-Initial implementation just spins up a Docker container, creates a table, inserts a row, reads the row back.
+The code demonstrates how PostgreSQL could be made to behave similar to ElasticSearch when updates only apply if the specified version is greater than the existing record version.
