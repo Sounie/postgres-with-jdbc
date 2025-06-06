@@ -35,9 +35,18 @@ class DependenciesRunnerTests {
             createTable(connection);
 
             UUID id = UUID.randomUUID();
-            insertRow(connection, id, "First event", 1);
+            upsertRow(connection, id, "First event", 1);
 
-            readRow(connection, id);
+            readRow(connection, id, 1);
+
+            upsertRow(connection, id, "First event", 2);
+
+            readRow(connection, id, 2);
+
+            // Expect upsert to not apply as the version is less than the version just written.
+            upsertRow(connection, id, "First event", 1);
+
+            readRow(connection, id, 2);
 
             outputMetadata(connection);
         }
@@ -59,8 +68,8 @@ class DependenciesRunnerTests {
         System.out.println("Time date functions: " + timeDateFunctions);
     }
 
-    private void readRow(Connection connection, UUID expectedId) throws SQLException {
-        try (PreparedStatement readStatement = connection.prepareStatement("SELECT * from event")) {
+    private void readRow(Connection connection, UUID expectedId, int expectedVersion) throws SQLException {
+        try (PreparedStatement readStatement = connection.prepareStatement("SELECT id, name, version from event")) {
             // assert that one result and has name of "First event"
             readStatement.execute();
 
@@ -68,7 +77,9 @@ class DependenciesRunnerTests {
                 boolean firstResult = resultSet.next();
                 assertThat(firstResult).isTrue();
                 UUID id = resultSet.getObject("id", UUID.class);
+                int version = resultSet.getInt("version");
                 assertThat(id).isEqualTo(expectedId);
+                assertThat(version).isEqualTo(expectedVersion);
                 assertThat(resultSet.getString("name")).isEqualTo("First event");
 
                 // Verifying that no unexpected additional results are returned.
@@ -78,14 +89,20 @@ class DependenciesRunnerTests {
         }
     }
 
-    private void insertRow(Connection connection, UUID id, String name, int version) throws SQLException {
-        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO event (id, name, version) VALUES (?, ?, ?)")) {
+    private void upsertRow(Connection connection, UUID id, String name, int version) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO event (id, name, version) VALUES (?, ?, ?) ON CONFLICT (id) DO UPDATE SET name = ?, version = ? " +
+                "WHERE event.version < ?")) {
             statement.setObject(1, id);
             statement.setString(2, name);
             statement.setInt(3, version);
 
-            int rowCount = statement.executeUpdate();
-            assertThat(rowCount).describedAs("Insert should make one row").isEqualTo(1);
+            statement.setString(4, name);
+            statement.setInt(5, version);
+
+            // Only update if the existing version is less than the current version.
+            statement.setInt(6, version);
+
+            statement.executeUpdate();
         }
     }
 
