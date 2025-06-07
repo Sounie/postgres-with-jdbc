@@ -24,7 +24,7 @@ class DependenciesRunnerTests {
             .withPassword(PASSWORD);
 
     @Test
-    void testDependencies() throws Exception {
+    void testPostgres() throws Exception {
         assertThat(postgres.isRunning()).isTrue();
         assertThat(postgres.getHost()).isNotEmpty();
         assertThat(postgres.getFirstMappedPort()).isGreaterThan(0);
