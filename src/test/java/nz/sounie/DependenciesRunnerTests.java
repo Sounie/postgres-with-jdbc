@@ -34,12 +34,15 @@ class DependenciesRunnerTests {
         try (Connection connection = DriverManager.getConnection(jdbcUrl, DB_USER, PASSWORD)) {
             createTable(connection);
 
+            setUpUpdateBeforeInsertFunction(connection);
+
             UUID id = UUID.randomUUID();
-            upsertRow(connection, id, "First event", 1);
+
+            upsertRowUsingFunction(connection, id, "First event", 1);
 
             readRow(connection, id, 1);
 
-            upsertRow(connection, id, "First event", 2);
+            upsertRowUsingFunction(connection, id, "First event", 2);
 
             readRow(connection, id, 2);
 
@@ -49,6 +52,45 @@ class DependenciesRunnerTests {
             readRow(connection, id, 2);
 
             outputMetadata(connection);
+        }
+    }
+
+    private void upsertRowUsingFunction(Connection connection, UUID id, String name, int version)
+    throws SQLException{
+        try (PreparedStatement functionCallStatement = connection.prepareStatement("SELECT updateELseInsert(?, ?, ?)")) {
+            functionCallStatement.setObject(1, id);
+            functionCallStatement.setString(2, name);
+            functionCallStatement.setInt(3, version);
+
+            functionCallStatement.execute();
+        }
+    }
+
+    private void setUpUpdateBeforeInsertFunction(Connection connection) throws SQLException {
+        try (PreparedStatement createFunctionStatement = connection.prepareStatement(
+                """
+CREATE FUNCTION updateElseInsert(idParam UUID, nameParam varchar(255), versionParam bigint) RETURNS VOID AS
+$$
+  BEGIN
+      LOOP
+          UPDATE event SET name = nameParam, version = versionParam WHERE id = idParam AND event.version < versionParam;
+          IF found THEN
+            RETURN;
+          END IF;
+          -- No record existed, so attempt insert
+          BEGIN
+            INSERT INTO event(id, name, version) values (idParam, nameParam, versionParam);
+            RETURN;
+          EXCEPTION WHEN unique_violation THEN
+            -- Do nothing, and loop to try the UPDATE again.
+          END;
+      END LOOP;
+  END;
+  $$
+  LANGUAGE plpgsql;
+"""
+        )) {
+            createFunctionStatement.executeUpdate();
         }
     }
 
