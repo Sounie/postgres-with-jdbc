@@ -38,11 +38,11 @@ class DependenciesRunnerTests {
 
             UUID id = UUID.randomUUID();
 
-            upsertRowUsingFunction(connection, id, "First event", 1);
+            upsertRow(connection, id, "First event", 1);
 
             readRow(connection, id, 1);
 
-            upsertRowUsingFunction(connection, id, "First event", 2);
+            upsertRow(connection, id, "First event", 2);
 
             readRow(connection, id, 2);
 
@@ -55,6 +55,7 @@ class DependenciesRunnerTests {
         }
     }
 
+    // This is how we could call a function, but we will avoid that while the function cannot distinguish version
     private void upsertRowUsingFunction(Connection connection, UUID id, String name, int version)
     throws SQLException{
         try (PreparedStatement functionCallStatement = connection.prepareStatement("SELECT updateELseInsert(?, ?, ?)")) {
@@ -67,6 +68,8 @@ class DependenciesRunnerTests {
     }
 
     private void setUpUpdateBeforeInsertFunction(Connection connection) throws SQLException {
+
+// Just trying out using a function to attempt update before insert. Limitation here is when version supplied is lower than existing version
         try (PreparedStatement createFunctionStatement = connection.prepareStatement(
                 """
 CREATE FUNCTION updateElseInsert(idParam UUID, nameParam varchar(255), versionParam bigint) RETURNS VOID AS
@@ -77,6 +80,7 @@ $$
           IF found THEN
             RETURN;
           END IF;
+          -- TODO: Here should 
           -- No record existed, so attempt insert
           BEGIN
             INSERT INTO event(id, name, version) values (idParam, nameParam, versionParam);
