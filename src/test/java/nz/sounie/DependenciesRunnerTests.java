@@ -69,7 +69,11 @@ class DependenciesRunnerTests {
 
     private void setUpUpdateBeforeInsertFunction(Connection connection) throws SQLException {
 
-// Just trying out using a function to attempt update before insert. Limitation here is when version supplied is lower than existing version
+/* Just trying out using a function to attempt update before insert.
+   The fatal limitation here is when version supplied is lower than the existing version, as that will result in no result
+   being found for the update, and an attempt to insert, that will fail - resulting in looping without an exit.
+*/
+
         try (PreparedStatement createFunctionStatement = connection.prepareStatement(
                 """
 CREATE FUNCTION updateElseInsert(idParam UUID, nameParam varchar(255), versionParam bigint) RETURNS VOID AS
@@ -80,7 +84,7 @@ $$
           IF found THEN
             RETURN;
           END IF;
-          -- TODO: Here should 
+          -- TODO: Here should
           -- No record existed, so attempt insert
           BEGIN
             INSERT INTO event(id, name, version) values (idParam, nameParam, versionParam);
