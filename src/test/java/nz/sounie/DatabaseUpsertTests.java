@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 // NB: Docker needs to be running in order for this test to be runnable.
 @Testcontainers
-class DependenciesRunnerTests {
+class DatabaseUpsertTests {
     private static final String DB_USER = "db-user";
     private static final String PASSWORD = "aBcDeFg54321";
 
