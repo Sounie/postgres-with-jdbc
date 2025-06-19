@@ -6,7 +6,9 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.sql.*;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,38 +26,68 @@ class DatabaseUpsertTests {
             .withPassword(PASSWORD);
 
     @Test
-    void testPostgres() throws Exception {
+    void testTransactionIsolationLevel() throws Exception {
+        int transactionReadUncommited = Connection.TRANSACTION_READ_UNCOMMITTED;
+
         assertThat(postgres.isRunning()).isTrue();
         assertThat(postgres.getHost()).isNotEmpty();
         assertThat(postgres.getFirstMappedPort()).isGreaterThan(0);
 
         String jdbcUrl = postgres.getJdbcUrl();
         System.out.println("JDBC URL: " + jdbcUrl);
+
+        // Set up table
         try (Connection connection = DriverManager.getConnection(jdbcUrl, DB_USER, PASSWORD)) {
             createTable(connection);
+        }
 
-            setUpUpdateBeforeInsertFunction(connection);
+        UUID id = UUID.randomUUID();
 
-            UUID id = UUID.randomUUID();
+        final int NUMBER_OF_UPSERTERS = 100;
+        List<Upserter> upserters = new ArrayList<>();
+        for (int i = 0; i < NUMBER_OF_UPSERTERS; i++) {
+            Connection connection = DriverManager.getConnection(jdbcUrl, DB_USER, PASSWORD);
+            connection.setAutoCommit(false);
 
-            upsertRow(connection, id, "First event", 1);
+            connection.setTransactionIsolation(transactionReadUncommited);
+            Upserter upserter = new Upserter(connection, id, "First event", i + 1);
+            upserters.add(upserter);
+        }
 
-            readRow(connection, id, 1);
+        // Shuffle the ordering of elements in the upserters list
+        Collections.shuffle(upserters);
 
-            upsertRow(connection, id, "First event", 2);
+        // Set up a concurrent executor to perform the upsert calls concurrently
+        try (ExecutorService executorService =  Executors.newFixedThreadPool(NUMBER_OF_UPSERTERS)) {
+            for (Upserter upserter : upserters) {
+                executorService.submit(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Sleeping to allow ExecutorService to accumulate upserters before they run
+                        try {
+                            Thread.sleep(200L);
+                        } catch (InterruptedException e) {
+                            System.out.println("Sleep interrupted");
+                        }
+                        upserter.performUpsert();
+                        if (!upserter.isSuccess()) {
+                            System.err.println("Upsert failed");
+                        }
 
-            readRow(connection, id, 2);
+                        upserter.closeConnection();
+                    }
+                });
+            }
+        }
 
-            // Expect upsert to not apply as the version is less than the version just written.
-            upsertRow(connection, id, "First event", 1);
+        // Wait for all upserters to finish.)
 
-            readRow(connection, id, 2);
-
-            outputMetadata(connection);
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, DB_USER, PASSWORD)) {
+            readRow(connection, id, NUMBER_OF_UPSERTERS);
         }
     }
 
-    // This is how we could call a function, but we will avoid that while the function cannot distinguish version
+    // This is how we could call a function, but we will avoid that while the function cannot distinguish versions
     private void upsertRowUsingFunction(Connection connection, UUID id, String name, int version)
     throws SQLException{
         try (PreparedStatement functionCallStatement = connection.prepareStatement("SELECT updateELseInsert(?, ?, ?)")) {
