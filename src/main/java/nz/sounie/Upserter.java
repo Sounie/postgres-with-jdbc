@@ -58,15 +58,19 @@ public class Upserter {
 
     void performUpsert()
     {
+        boolean rowChanged = false;
         try {
-            statement.executeUpdate();
+            int rowsChanged = statement.executeUpdate();
+            if (rowsChanged == 1) {
+                rowChanged = true;
+            }
 
             connection.commit();
 
             this.success = true;
         } catch (SQLException e) {
             try {
-                System.err.println("Failed to commit prepared statement, " + e.getMessage());
+                System.err.println("Failed to commit prepared statement, " + e.getMessage() + " Rolling back.");
                 connection.rollback();
             }  catch (SQLException ex) {
                 System.err.println("Failure during rollback, " + ex.getMessage());
@@ -74,7 +78,11 @@ public class Upserter {
             // Don't need to do anything here, as success state will remain false.
         } finally {
             try {
-                System.out.println("Version " + version + " inserted / updated");
+                if (rowChanged) {
+                    System.out.println("Version " + version + " inserted / updated");
+                } else {
+                    System.out.println("No row changed, presume version was already > " + version);
+                }
                 statement.close();
             } catch (SQLException e) {
                 // We don't regard this as the upsert failing.
