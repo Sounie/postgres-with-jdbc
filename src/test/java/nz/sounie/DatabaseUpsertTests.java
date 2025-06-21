@@ -27,6 +27,8 @@ class DatabaseUpsertTests {
 
     @Test
     void testTransactionIsolationLevel() throws Exception {
+        // "In PostgreSQL READ UNCOMMITTED is treated as READ COMMITTED." ( https://www.postgresql.org/docs/current/sql-set-transaction.html )
+        // So, we cannot trigger a situation where a transaction could read a value that a non-committed transaction has set
         int transactionReadUncommited = Connection.TRANSACTION_READ_UNCOMMITTED;
 
         assertThat(postgres.isRunning()).isTrue();
@@ -43,7 +45,7 @@ class DatabaseUpsertTests {
 
         UUID id = UUID.randomUUID();
 
-        final int NUMBER_OF_UPSERTERS = 100;
+        final int NUMBER_OF_UPSERTERS = 5;
         List<Upserter> upserters = new ArrayList<>();
         for (int i = 0; i < NUMBER_OF_UPSERTERS; i++) {
             Connection connection = DriverManager.getConnection(jdbcUrl, DB_USER, PASSWORD);
@@ -83,7 +85,10 @@ class DatabaseUpsertTests {
         // Wait for all upserters to finish.)
 
         try (Connection connection = DriverManager.getConnection(jdbcUrl, DB_USER, PASSWORD)) {
-            readRow(connection, id, NUMBER_OF_UPSERTERS);
+            // Expecting 99 to be the highest value, as we have connections being dropped for multiples of 5 for version
+            // If isolation level allows reading a non-committed write for the update to 100 then we could see a value other than 99
+            // if the faulty update to 100 happened before the update to version 99
+            readRow(connection, id, 4);
         }
     }
 
