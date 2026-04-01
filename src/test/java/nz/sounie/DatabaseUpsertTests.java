@@ -1,5 +1,6 @@
 package nz.sounie;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
@@ -40,7 +41,7 @@ class DatabaseUpsertTests {
 
         // Set up table
         try (Connection connection = DriverManager.getConnection(jdbcUrl, DB_USER, PASSWORD)) {
-            createTable(connection);
+            DatabaseSetup.createTable(connection);
         }
 
         UUID id = UUID.randomUUID();
@@ -92,6 +93,17 @@ class DatabaseUpsertTests {
         }
     }
 
+    @AfterAll
+    static void closeDownDatabaseSetup() throws Exception {
+        String jdbcUrl = postgres.getJdbcUrl();
+        System.out.println("JDBC URL: " + jdbcUrl);
+
+        // Set up table
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, DB_USER, PASSWORD)) {
+            DatabaseSetup.dropTable(connection);
+        }
+    }
+
     // This is how we could call a function, but we will avoid that while the function cannot distinguish versions
     private void upsertRowUsingFunction(Connection connection, UUID id, String name, int version)
     throws SQLException{
@@ -121,7 +133,6 @@ $$
           IF found THEN
             RETURN;
           END IF;
-          -- TODO: Here should
           -- No record existed, so attempt insert
           BEGIN
             INSERT INTO event(id, name, version) values (idParam, nameParam, versionParam);
@@ -190,14 +201,6 @@ $$
             statement.setInt(6, version);
 
             statement.executeUpdate();
-        }
-    }
-
-    private static void createTable(Connection connection) throws SQLException {
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("CREATE TABLE event (id UUID PRIMARY KEY, " +
-                    "name varchar(255) NOT NULL," +
-                    "version bigint NOT NULL DEFAULT 0)");
         }
     }
 }

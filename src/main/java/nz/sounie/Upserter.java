@@ -63,11 +63,29 @@ public class Upserter {
             int rowsChanged = statement.executeUpdate();
             if (rowsChanged == 1) {
                 rowChanged = true;
+            } else if (rowsChanged > 1) {
+                System.out.println("Unexpected rows changed count: " + rowsChanged);
+            } else if (rowsChanged == 0) {
+                System.out.println("No rows were inserted or updated.");
             }
 
-            connection.commit();
+            if (version % 5 == 0) {
+                // Attempting to simulate sometimes dropping connection mid-transaction
+                System.out.println("Closing connection mid-transaction for version " + version);
+                try {
+                    // Simulating a delay before connection gets dropped, allowing for possibility of pther
+                    // statements to see non-committed version.
+                    Thread.sleep(2000L);
+                    System.out.println("After delay, closing connection for version " + version);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                connection.close();
+            } else {
+                connection.commit();
 
-            this.success = true;
+                this.success = true;
+            }
         } catch (SQLException e) {
             try {
                 System.err.println("Failed to commit prepared statement, " + e.getMessage() + " Rolling back.");
@@ -79,7 +97,12 @@ public class Upserter {
         } finally {
             try {
                 if (rowChanged) {
-                    System.out.println("Version " + version + " inserted / updated");
+                    if (success) {
+                        System.out.println("Version " + version + " inserted / updated");
+                    }
+                    else {
+                        System.out.println("Version " + version + " inserted / updated, but connection closed without commit.");
+                    }
                 } else {
                     System.out.println("No row changed, presume version was already > " + version);
                 }
