@@ -4,3 +4,7 @@ The code demonstrates how PostgreSQL could be made to behave similar to ElasticS
 
 In a situation where updates are more common than inserts, it is tempting to come up with a mechanism whereby an update is attempted before falling back to an insert when the record does not already exist, but the versioning clause would mean that updates could come back as changing no rows even when a record with the specific id exists.
 
+Also trying out DependABot in GitHub, including checking whether it can function with generated lockfile.
+
+Lockfile handling involves the maven plugin:
+ io.github.chains-project:maven-lockfile
