@@ -1,0 +1,1021 @@
+{
+  "artifactId": "postgres-with-jdbc",
+  "groupId": "nz.sounie",
+  "version": "1.0-SNAPSHOT",
+  "pom": {
+    "groupId": "nz.sounie",
+    "artifactId": "postgres-with-jdbc",
+    "version": "1.0-SNAPSHOT",
+    "relativePath": "pom.xml",
+    "checksumAlgorithm": "SHA-256",
+    "checksum": "af7c53ad6ee5678a7ebdbc1a3e4272e3730f4a49230617434113e8eddfae3191",
+    "boms": [
+      {
+        "groupId": "org.junit",
+        "artifactId": "junit-bom",
+        "version": "6.0.3",
+        "resolved": "https://repo.maven.apache.org/maven2/org/junit/junit-bom/6.0.3/junit-bom-6.0.3.pom",
+        "repositoryId": "central",
+        "checksumAlgorithm": "SHA-256",
+        "checksum": "a655b6a5dc00d1bebc91fb2b15c0c7e8aeac9d6bdcf879595505370e27530287"
+      }
+    ]
+  },
+  "lockFileVersion": 1,
+  "dependencies": [
+    {
+      "groupId": "org.assertj",
+      "artifactId": "assertj-core",
+      "version": "3.27.7",
+      "checksumAlgorithm": "SHA-256",
+      "checksum": "c4a445426c3c2861666863b842cc4ec7bbb1c4226fefd370b6d2fe83d6c4ff0f",
+      "scope": "test",
+      "resolved": "https://repo.maven.apache.org/maven2/org/assertj/assertj-core/3.27.7/assertj-core-3.27.7.jar",
+      "repositoryId": "central",
+      "selectedVersion": "3.27.7",
+      "included": true,
+      "id": "org.assertj:assertj-core:3.27.7",
+      "children": [
+        {
+          "groupId": "net.bytebuddy",
+          "artifactId": "byte-buddy",
+          "version": "1.18.3",
+          "checksumAlgorithm": "SHA-256",
+          "checksum": "d78396e3c5bce3f2865c9186647481e5589d34cacc632484715b686108d17c66",
+          "scope": "test",
+          "resolved": "https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.18.3/byte-buddy-1.18.3.jar",
+          "repositoryId": "central",
+          "parentPom": {
+            "groupId": "net.bytebuddy",
+            "artifactId": "byte-buddy-parent",
+            "version": "1.18.3",
+            "resolved": "https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-parent/1.18.3/byte-buddy-parent-1.18.3.pom",
+            "repositoryId": "central",
+            "checksumAlgorithm": "SHA-256",
+            "checksum": "90ea531731508eea75ff9295141c508d7f9a53d1a05f45b80f8f4999521426ef"
+          },
+          "selectedVersion": "1.18.3",
+          "included": true,
+          "id": "net.bytebuddy:byte-buddy:1.18.3",
+          "parent": "org.assertj:assertj-core:3.27.7",
+          "children": [],
+          "boms": []
+        }
+      ],
+      "boms": []
+    },
+    {
+      "groupId": "org.junit.jupiter",
+      "artifactId": "junit-jupiter",
+      "version": "6.0.3",
+      "checksumAlgorithm": "SHA-256",
+      "checksum": "784b65815f479a0c99a9d3a573b142e2a525efb6025d97f751b19e72f90aeda3",
+      "scope": "test",
+      "resolved": "https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter/6.0.3/junit-jupiter-6.0.3.jar",
+      "repositoryId": "central",
+      "selectedVersion": "6.0.3",
+      "included": true,
+      "id": "org.junit.jupiter:junit-jupiter:6.0.3",
+      "children": [
+        {
+          "groupId": "org.junit.jupiter",
+          "artifactId": "junit-jupiter-api",
+          "version": "6.0.3",
+          "checksumAlgorithm": "SHA-256",
+          "checksum": "d655d7e6f0c7ae07f10a2f3bbaaebb6d30e9b26204a068ad9e9b3950aa28792c",
+          "scope": "test",
+          "resolved": "https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-api/6.0.3/junit-jupiter-api-6.0.3.jar",
+          "repositoryId": "central",
+          "selectedVersion": "6.0.3",
+          "included": true,
+          "id": "org.junit.jupiter:junit-jupiter-api:6.0.3",
+          "parent": "org.junit.jupiter:junit-jupiter:6.0.3",
+          "children": [
+            {
+              "groupId": "org.apiguardian",
+              "artifactId": "apiguardian-api",
+              "version": "1.1.2",
+              "checksumAlgorithm": "SHA-256",
+              "checksum": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38",
+              "scope": "test",
+              "resolved": "https://repo.maven.apache.org/maven2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+              "repositoryId": "central",
+              "selectedVersion": "1.1.2",
+              "included": true,
+              "id": "org.apiguardian:apiguardian-api:1.1.2",
+              "parent": "org.junit.jupiter:junit-jupiter-api:6.0.3",
+              "children": [],
+              "boms": []
+            },
+            {
+              "groupId": "org.jspecify",
+              "artifactId": "jspecify",
+              "version": "1.0.0",
+              "checksumAlgorithm": "SHA-256",
+              "checksum": "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab",
+              "scope": "test",
+              "resolved": "https://repo.maven.apache.org/maven2/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar",
+              "repositoryId": "central",
+              "selectedVersion": "1.0.0",
+              "included": true,
+              "id": "org.jspecify:jspecify:1.0.0",
+              "parent": "org.junit.jupiter:junit-jupiter-api:6.0.3",
+              "children": [],
+              "boms": []
+            },
+            {
+              "groupId": "org.junit.platform",
+              "artifactId": "junit-platform-commons",
+              "version": "6.0.3",
+              "checksumAlgorithm": "SHA-256",
+              "checksum": "39f262d09c3d52719fe0b77f080e90a3695e285d779a41b232e17963ae5da200",
+              "scope": "test",
+              "resolved": "https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-commons/6.0.3/junit-platform-commons-6.0.3.jar",
+              "repositoryId": "central",
+              "selectedVersion": "6.0.3",
+              "included": true,
+              "id": "org.junit.platform:junit-platform-commons:6.0.3",
+              "parent": "org.junit.jupiter:junit-jupiter-api:6.0.3",
+              "children": [
+                {
+                  "groupId": "org.apiguardian",
+                  "artifactId": "apiguardian-api",
+                  "version": "1.1.2",
+                  "checksumAlgorithm": "SHA-256",
+                  "checksum": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38",
+                  "scope": "test",
+                  "resolved": "https://repo.maven.apache.org/maven2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+                  "repositoryId": "central",
+                  "selectedVersion": "1.1.2",
+                  "included": false,
+                  "id": "org.apiguardian:apiguardian-api:1.1.2",
+                  "parent": "org.junit.platform:junit-platform-commons:6.0.3",
+                  "children": [],
+                  "boms": []
+                },
+                {
+                  "groupId": "org.jspecify",
+                  "artifactId": "jspecify",
+                  "version": "1.0.0",
+                  "checksumAlgorithm": "SHA-256",
+                  "checksum": "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab",
+                  "scope": "test",
+                  "resolved": "https://repo.maven.apache.org/maven2/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar",
+                  "repositoryId": "central",
+                  "selectedVersion": "1.0.0",
+                  "included": false,
+                  "id": "org.jspecify:jspecify:1.0.0",
+                  "parent": "org.junit.platform:junit-platform-commons:6.0.3",
+                  "children": [],
+                  "boms": []
+                }
+              ],
+              "boms": [
+                {
+                  "groupId": "org.junit",
+                  "artifactId": "junit-bom",
+                  "version": "6.0.3",
+                  "resolved": "https://repo.maven.apache.org/maven2/org/junit/junit-bom/6.0.3/junit-bom-6.0.3.pom",
+                  "repositoryId": "central",
+                  "checksumAlgorithm": "SHA-256",
+                  "checksum": "a655b6a5dc00d1bebc91fb2b15c0c7e8aeac9d6bdcf879595505370e27530287"
+                }
+              ]
+            },
+            {
+              "groupId": "org.opentest4j",
+              "artifactId": "opentest4j",
+              "version": "1.3.0",
+              "checksumAlgorithm": "SHA-256",
+              "checksum": "48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b",
+              "scope": "test",
+              "resolved": "https://repo.maven.apache.org/maven2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar",
+              "repositoryId": "central",
+              "selectedVersion": "1.3.0",
+              "included": true,
+              "id": "org.opentest4j:opentest4j:1.3.0",
+              "parent": "org.junit.jupiter:junit-jupiter-api:6.0.3",
+              "children": [],
+              "boms": []
+            }
+          ],
+          "boms": [
+            {
+              "groupId": "org.junit",
+              "artifactId": "junit-bom",
+              "version": "6.0.3",
+              "resolved": "https://repo.maven.apache.org/maven2/org/junit/junit-bom/6.0.3/junit-bom-6.0.3.pom",
+              "repositoryId": "central",
+              "checksumAlgorithm": "SHA-256",
+              "checksum": "a655b6a5dc00d1bebc91fb2b15c0c7e8aeac9d6bdcf879595505370e27530287"
+            }
+          ]
+        },
+        {
+          "groupId": "org.junit.jupiter",
+          "artifactId": "junit-jupiter-engine",
+          "version": "6.0.3",
+          "checksumAlgorithm": "SHA-256",
+          "checksum": "1e2fab61ad27ea08fc7c70dd9677cf8c6d1ae5434d42dcfdd633b12c7e7c04d0",
+          "scope": "test",
+          "resolved": "https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-engine/6.0.3/junit-jupiter-engine-6.0.3.jar",
+          "repositoryId": "central",
+          "selectedVersion": "6.0.3",
+          "included": true,
+          "id": "org.junit.jupiter:junit-jupiter-engine:6.0.3",
+          "parent": "org.junit.jupiter:junit-jupiter:6.0.3",
+          "children": [
+            {
+              "groupId": "org.apiguardian",
+              "artifactId": "apiguardian-api",
+              "version": "1.1.2",
+              "checksumAlgorithm": "SHA-256",
+              "checksum": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38",
+              "scope": "test",
+              "resolved": "https://repo.maven.apache.org/maven2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+              "repositoryId": "central",
+              "selectedVersion": "1.1.2",
+              "included": false,
+              "id": "org.apiguardian:apiguardian-api:1.1.2",
+              "parent": "org.junit.jupiter:junit-jupiter-engine:6.0.3",
+              "children": [],
+              "boms": []
+            },
+            {
+              "groupId": "org.jspecify",
+              "artifactId": "jspecify",
+              "version": "1.0.0",
+              "checksumAlgorithm": "SHA-256",
+              "checksum": "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab",
+              "scope": "test",
+              "resolved": "https://repo.maven.apache.org/maven2/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar",
+              "repositoryId": "central",
+              "selectedVersion": "1.0.0",
+              "included": false,
+              "id": "org.jspecify:jspecify:1.0.0",
+              "parent": "org.junit.jupiter:junit-jupiter-engine:6.0.3",
+              "children": [],
+              "boms": []
+            },
+            {
+              "groupId": "org.junit.jupiter",
+              "artifactId": "junit-jupiter-api",
+              "version": "6.0.3",
+              "checksumAlgorithm": "SHA-256",
+              "checksum": "d655d7e6f0c7ae07f10a2f3bbaaebb6d30e9b26204a068ad9e9b3950aa28792c",
+              "scope": "test",
+              "resolved": "https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-api/6.0.3/junit-jupiter-api-6.0.3.jar",
+              "repositoryId": "central",
+              "selectedVersion": "6.0.3",
+              "included": false,
+              "id": "org.junit.jupiter:junit-jupiter-api:6.0.3",
+              "parent": "org.junit.jupiter:junit-jupiter-engine:6.0.3",
+              "children": [],
+              "boms": []
+            },
+            {
+              "groupId": "org.junit.platform",
+              "artifactId": "junit-platform-engine",
+              "version": "6.0.3",
+              "checksumAlgorithm": "SHA-256",
+              "checksum": "491e9e4f745f161b8a8e4186a1a7c6a450ea12c70930c9aedae427215301d947",
+              "scope": "test",
+              "resolved": "https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-engine/6.0.3/junit-platform-engine-6.0.3.jar",
+              "repositoryId": "central",
+              "selectedVersion": "6.0.3",
+              "included": true,
+              "id": "org.junit.platform:junit-platform-engine:6.0.3",
+              "parent": "org.junit.jupiter:junit-jupiter-engine:6.0.3",
+              "children": [
+                {
+                  "groupId": "org.apiguardian",
+                  "artifactId": "apiguardian-api",
+                  "version": "1.1.2",
+                  "checksumAlgorithm": "SHA-256",
+                  "checksum": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38",
+                  "scope": "test",
+                  "resolved": "https://repo.maven.apache.org/maven2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+                  "repositoryId": "central",
+                  "selectedVersion": "1.1.2",
+                  "included": false,
+                  "id": "org.apiguardian:apiguardian-api:1.1.2",
+                  "parent": "org.junit.platform:junit-platform-engine:6.0.3",
+                  "children": [],
+                  "boms": []
+                },
+                {
+                  "groupId": "org.jspecify",
+                  "artifactId": "jspecify",
+                  "version": "1.0.0",
+                  "checksumAlgorithm": "SHA-256",
+                  "checksum": "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab",
+                  "scope": "test",
+                  "resolved": "https://repo.maven.apache.org/maven2/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar",
+                  "repositoryId": "central",
+                  "selectedVersion": "1.0.0",
+                  "included": false,
+                  "id": "org.jspecify:jspecify:1.0.0",
+                  "parent": "org.junit.platform:junit-platform-engine:6.0.3",
+                  "children": [],
+                  "boms": []
+                },
+                {
+                  "groupId": "org.junit.platform",
+                  "artifactId": "junit-platform-commons",
+                  "version": "6.0.3",
+                  "checksumAlgorithm": "SHA-256",
+                  "checksum": "39f262d09c3d52719fe0b77f080e90a3695e285d779a41b232e17963ae5da200",
+                  "scope": "test",
+                  "resolved": "https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-commons/6.0.3/junit-platform-commons-6.0.3.jar",
+                  "repositoryId": "central",
+                  "selectedVersion": "6.0.3",
+                  "included": false,
+                  "id": "org.junit.platform:junit-platform-commons:6.0.3",
+                  "parent": "org.junit.platform:junit-platform-engine:6.0.3",
+                  "children": [],
+                  "boms": []
+                },
+                {
+                  "groupId": "org.opentest4j",
+                  "artifactId": "opentest4j",
+                  "version": "1.3.0",
+                  "checksumAlgorithm": "SHA-256",
+                  "checksum": "48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b",
+                  "scope": "test",
+                  "resolved": "https://repo.maven.apache.org/maven2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar",
+                  "repositoryId": "central",
+                  "selectedVersion": "1.3.0",
+                  "included": false,
+                  "id": "org.opentest4j:opentest4j:1.3.0",
+                  "parent": "org.junit.platform:junit-platform-engine:6.0.3",
+                  "children": [],
+                  "boms": []
+                }
+              ],
+              "boms": [
+                {
+                  "groupId": "org.junit",
+                  "artifactId": "junit-bom",
+                  "version": "6.0.3",
+                  "resolved": "https://repo.maven.apache.org/maven2/org/junit/junit-bom/6.0.3/junit-bom-6.0.3.pom",
+                  "repositoryId": "central",
+                  "checksumAlgorithm": "SHA-256",
+                  "checksum": "a655b6a5dc00d1bebc91fb2b15c0c7e8aeac9d6bdcf879595505370e27530287"
+                }
+              ]
+            }
+          ],
+          "boms": [
+            {
+              "groupId": "org.junit",
+              "artifactId": "junit-bom",
+              "version": "6.0.3",
+              "resolved": "https://repo.maven.apache.org/maven2/org/junit/junit-bom/6.0.3/junit-bom-6.0.3.pom",
+              "repositoryId": "central",
+              "checksumAlgorithm": "SHA-256",
+              "checksum": "a655b6a5dc00d1bebc91fb2b15c0c7e8aeac9d6bdcf879595505370e27530287"
+            }
+          ]
+        },
+        {
+          "groupId": "org.junit.jupiter",
+          "artifactId": "junit-jupiter-params",
+          "version": "6.0.3",
+          "checksumAlgorithm": "SHA-256",
+          "checksum": "cf2947e2302b9f8c8a059259a277881c1cadae8fbc2514c16a925cfeb7beb2e5",
+          "scope": "test",
+          "resolved": "https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-params/6.0.3/junit-jupiter-params-6.0.3.jar",
+          "repositoryId": "central",
+          "selectedVersion": "6.0.3",
+          "included": true,
+          "id": "org.junit.jupiter:junit-jupiter-params:6.0.3",
+          "parent": "org.junit.jupiter:junit-jupiter:6.0.3",
+          "children": [
+            {
+              "groupId": "org.apiguardian",
+              "artifactId": "apiguardian-api",
+              "version": "1.1.2",
+              "checksumAlgorithm": "SHA-256",
+              "checksum": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38",
+              "scope": "test",
+              "resolved": "https://repo.maven.apache.org/maven2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+              "repositoryId": "central",
+              "selectedVersion": "1.1.2",
+              "included": false,
+              "id": "org.apiguardian:apiguardian-api:1.1.2",
+              "parent": "org.junit.jupiter:junit-jupiter-params:6.0.3",
+              "children": [],
+              "boms": []
+            },
+            {
+              "groupId": "org.jspecify",
+              "artifactId": "jspecify",
+              "version": "1.0.0",
+              "checksumAlgorithm": "SHA-256",
+              "checksum": "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab",
+              "scope": "test",
+              "resolved": "https://repo.maven.apache.org/maven2/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar",
+              "repositoryId": "central",
+              "selectedVersion": "1.0.0",
+              "included": false,
+              "id": "org.jspecify:jspecify:1.0.0",
+              "parent": "org.junit.jupiter:junit-jupiter-params:6.0.3",
+              "children": [],
+              "boms": []
+            },
+            {
+              "groupId": "org.junit.jupiter",
+              "artifactId": "junit-jupiter-api",
+              "version": "6.0.3",
+              "checksumAlgorithm": "SHA-256",
+              "checksum": "d655d7e6f0c7ae07f10a2f3bbaaebb6d30e9b26204a068ad9e9b3950aa28792c",
+              "scope": "test",
+              "resolved": "https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-api/6.0.3/junit-jupiter-api-6.0.3.jar",
+              "repositoryId": "central",
+              "selectedVersion": "6.0.3",
+              "included": false,
+              "id": "org.junit.jupiter:junit-jupiter-api:6.0.3",
+              "parent": "org.junit.jupiter:junit-jupiter-params:6.0.3",
+              "children": [],
+              "boms": []
+            }
+          ],
+          "boms": [
+            {
+              "groupId": "org.junit",
+              "artifactId": "junit-bom",
+              "version": "6.0.3",
+              "resolved": "https://repo.maven.apache.org/maven2/org/junit/junit-bom/6.0.3/junit-bom-6.0.3.pom",
+              "repositoryId": "central",
+              "checksumAlgorithm": "SHA-256",
+              "checksum": "a655b6a5dc00d1bebc91fb2b15c0c7e8aeac9d6bdcf879595505370e27530287"
+            }
+          ]
+        }
+      ],
+      "boms": [
+        {
+          "groupId": "org.junit",
+          "artifactId": "junit-bom",
+          "version": "6.0.3",
+          "resolved": "https://repo.maven.apache.org/maven2/org/junit/junit-bom/6.0.3/junit-bom-6.0.3.pom",
+          "repositoryId": "central",
+          "checksumAlgorithm": "SHA-256",
+          "checksum": "a655b6a5dc00d1bebc91fb2b15c0c7e8aeac9d6bdcf879595505370e27530287"
+        }
+      ]
+    },
+    {
+      "groupId": "org.postgresql",
+      "artifactId": "postgresql",
+      "version": "42.7.11",
+      "checksumAlgorithm": "SHA-256",
+      "checksum": "1981b31d3993c58702783c1cddf10a34e48c1f413d70ff1cb6def0a143484647",
+      "scope": "compile",
+      "resolved": "https://repo.maven.apache.org/maven2/org/postgresql/postgresql/42.7.11/postgresql-42.7.11.jar",
+      "repositoryId": "central",
+      "selectedVersion": "42.7.11",
+      "included": true,
+      "id": "org.postgresql:postgresql:42.7.11",
+      "children": [],
+      "boms": []
+    },
+    {
+      "groupId": "org.testcontainers",
+      "artifactId": "testcontainers-junit-jupiter",
+      "version": "2.0.5",
+      "checksumAlgorithm": "SHA-256",
+      "checksum": "d66eb7f257a85833a8cc973e3814d740967d40a7db1a0de0040653c6ed236748",
+      "scope": "test",
+      "resolved": "https://repo.maven.apache.org/maven2/org/testcontainers/testcontainers-junit-jupiter/2.0.5/testcontainers-junit-jupiter-2.0.5.jar",
+      "repositoryId": "central",
+      "selectedVersion": "2.0.5",
+      "included": true,
+      "id": "org.testcontainers:testcontainers-junit-jupiter:2.0.5",
+      "children": [
+        {
+          "groupId": "org.testcontainers",
+          "artifactId": "testcontainers",
+          "version": "2.0.5",
+          "checksumAlgorithm": "SHA-256",
+          "checksum": "0466f481343d5f350a91274cd7bf984308cbaf90d706247fd1cf4b1a8010c2e1",
+          "scope": "test",
+          "resolved": "https://repo.maven.apache.org/maven2/org/testcontainers/testcontainers/2.0.5/testcontainers-2.0.5.jar",
+          "repositoryId": "central",
+          "selectedVersion": "2.0.5",
+          "included": true,
+          "id": "org.testcontainers:testcontainers:2.0.5",
+          "parent": "org.testcontainers:testcontainers-junit-jupiter:2.0.5",
+          "children": [
+            {
+              "groupId": "com.github.docker-java",
+              "artifactId": "docker-java-api",
+              "version": "3.7.1",
+              "checksumAlgorithm": "SHA-256",
+              "checksum": "dad153d484b1f4ef009e2fdbad27e07aeb3191122da52b8985507ac504300081",
+              "scope": "test",
+              "resolved": "https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-api/3.7.1/docker-java-api-3.7.1.jar",
+              "repositoryId": "central",
+              "parentPom": {
+                "groupId": "com.github.docker-java",
+                "artifactId": "docker-java-parent",
+                "version": "3.7.1",
+                "resolved": "https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-parent/3.7.1/docker-java-parent-3.7.1.pom",
+                "repositoryId": "central",
+                "checksumAlgorithm": "SHA-256",
+                "checksum": "78e673434e0e1a4b825863a8fe4d6417f495affdce7b4d308f3774447a73b0ff"
+              },
+              "selectedVersion": "3.7.1",
+              "included": true,
+              "id": "com.github.docker-java:docker-java-api:3.7.1",
+              "parent": "org.testcontainers:testcontainers:2.0.5",
+              "children": [
+                {
+                  "groupId": "com.fasterxml.jackson.core",
+                  "artifactId": "jackson-annotations",
+                  "version": "2.20",
+                  "checksumAlgorithm": "SHA-256",
+                  "checksum": "959a2ffb2d591436f51f183c6a521fc89347912f711bf0cae008cdf045d95319",
+                  "scope": "test",
+                  "resolved": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.20/jackson-annotations-2.20.jar",
+                  "repositoryId": "central",
+                  "parentPom": {
+                    "groupId": "com.fasterxml.jackson",
+                    "artifactId": "jackson-parent",
+                    "version": "2.20",
+                    "resolved": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-parent/2.20/jackson-parent-2.20.pom",
+                    "repositoryId": "central",
+                    "checksumAlgorithm": "SHA-256",
+                    "checksum": "b43b7f5c62e86b164fae70ae17d6911c5db60799af01057360afda82e4845be5",
+                    "parent": {
+                      "groupId": "com.fasterxml",
+                      "artifactId": "oss-parent",
+                      "version": "70",
+                      "resolved": "https://repo.maven.apache.org/maven2/com/fasterxml/oss-parent/70/oss-parent-70.pom",
+                      "repositoryId": "central",
+                      "checksumAlgorithm": "SHA-256",
+                      "checksum": "26ca8ed6f82c9d2ed7cd32298105bb65c0f9d899db61757a09741586fa93a639"
+                    }
+                  },
+                  "selectedVersion": "2.20",
+                  "included": true,
+                  "id": "com.fasterxml.jackson.core:jackson-annotations:2.20",
+                  "parent": "com.github.docker-java:docker-java-api:3.7.1",
+                  "children": [],
+                  "boms": []
+                },
+                {
+                  "groupId": "org.slf4j",
+                  "artifactId": "slf4j-api",
+                  "version": "1.7.30",
+                  "checksumAlgorithm": "SHA-256",
+                  "checksum": "cdba07964d1bb40a0761485c6b1e8c2f8fd9eb1d19c53928ac0d7f9510105c57",
+                  "scope": "test",
+                  "resolved": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar",
+                  "repositoryId": "central",
+                  "parentPom": {
+                    "groupId": "org.slf4j",
+                    "artifactId": "slf4j-parent",
+                    "version": "1.7.30",
+                    "resolved": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.7.30/slf4j-parent-1.7.30.pom",
+                    "repositoryId": "central",
+                    "checksumAlgorithm": "SHA-256",
+                    "checksum": "11647956e48a0c5bfb3ac33f6da7e83f341002b6857efd335a505b687be34b75"
+                  },
+                  "selectedVersion": "1.7.36",
+                  "included": false,
+                  "id": "org.slf4j:slf4j-api:1.7.30",
+                  "parent": "com.github.docker-java:docker-java-api:3.7.1",
+                  "children": [],
+                  "boms": []
+                }
+              ],
+              "boms": []
+            },
+            {
+              "groupId": "com.github.docker-java",
+              "artifactId": "docker-java-transport-zerodep",
+              "version": "3.7.1",
+              "checksumAlgorithm": "SHA-256",
+              "checksum": "b89bdb1754160323597f9ea32a7fe7a4a3aa8f5b3b43b88e8d71fff3b267ab21",
+              "scope": "test",
+              "resolved": "https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-transport-zerodep/3.7.1/docker-java-transport-zerodep-3.7.1.jar",
+              "repositoryId": "central",
+              "parentPom": {
+                "groupId": "com.github.docker-java",
+                "artifactId": "docker-java-parent",
+                "version": "3.7.1",
+                "resolved": "https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-parent/3.7.1/docker-java-parent-3.7.1.pom",
+                "repositoryId": "central",
+                "checksumAlgorithm": "SHA-256",
+                "checksum": "78e673434e0e1a4b825863a8fe4d6417f495affdce7b4d308f3774447a73b0ff"
+              },
+              "selectedVersion": "3.7.1",
+              "included": true,
+              "id": "com.github.docker-java:docker-java-transport-zerodep:3.7.1",
+              "parent": "org.testcontainers:testcontainers:2.0.5",
+              "children": [
+                {
+                  "groupId": "com.github.docker-java",
+                  "artifactId": "docker-java-transport",
+                  "version": "3.7.1",
+                  "checksumAlgorithm": "SHA-256",
+                  "checksum": "d15eec8034bf0f92c2a48ca9172691804048115c96dc853272f9486fa2695c3c",
+                  "scope": "test",
+                  "resolved": "https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-transport/3.7.1/docker-java-transport-3.7.1.jar",
+                  "repositoryId": "central",
+                  "parentPom": {
+                    "groupId": "com.github.docker-java",
+                    "artifactId": "docker-java-parent",
+                    "version": "3.7.1",
+                    "resolved": "https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-parent/3.7.1/docker-java-parent-3.7.1.pom",
+                    "repositoryId": "central",
+                    "checksumAlgorithm": "SHA-256",
+                    "checksum": "78e673434e0e1a4b825863a8fe4d6417f495affdce7b4d308f3774447a73b0ff"
+                  },
+                  "selectedVersion": "3.7.1",
+                  "included": true,
+                  "id": "com.github.docker-java:docker-java-transport:3.7.1",
+                  "parent": "com.github.docker-java:docker-java-transport-zerodep:3.7.1",
+                  "children": [],
+                  "boms": []
+                },
+                {
+                  "groupId": "net.java.dev.jna",
+                  "artifactId": "jna",
+                  "version": "5.18.1",
+                  "checksumAlgorithm": "SHA-256",
+                  "checksum": "260c4b1e22b1db9e110ee441c4f13ce115f841fa48c41d78750986214b395557",
+                  "scope": "test",
+                  "resolved": "https://repo.maven.apache.org/maven2/net/java/dev/jna/jna/5.18.1/jna-5.18.1.jar",
+                  "repositoryId": "central",
+                  "selectedVersion": "5.18.1",
+                  "included": true,
+                  "id": "net.java.dev.jna:jna:5.18.1",
+                  "parent": "com.github.docker-java:docker-java-transport-zerodep:3.7.1",
+                  "children": [],
+                  "boms": []
+                },
+                {
+                  "groupId": "org.slf4j",
+                  "artifactId": "slf4j-api",
+                  "version": "1.7.36",
+                  "checksumAlgorithm": "SHA-256",
+                  "checksum": "d3ef575e3e4979678dc01bf1dcce51021493b4d11fb7f1be8ad982877c16a1c0",
+                  "scope": "test",
+                  "resolved": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar",
+                  "repositoryId": "central",
+                  "selectedVersion": "1.7.36",
+                  "included": false,
+                  "id": "org.slf4j:slf4j-api:1.7.36",
+                  "parent": "com.github.docker-java:docker-java-transport-zerodep:3.7.1",
+                  "children": [],
+                  "boms": []
+                }
+              ],
+              "boms": []
+            },
+            {
+              "groupId": "org.apache.commons",
+              "artifactId": "commons-compress",
+              "version": "1.28.0",
+              "checksumAlgorithm": "SHA-256",
+              "checksum": "e1522945218456f3649a39bc4afd70ce4bd466221519dba7d378f2141a4642ca",
+              "scope": "test",
+              "resolved": "https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.28.0/commons-compress-1.28.0.jar",
+              "repositoryId": "central",
+              "parentPom": {
+                "groupId": "org.apache.commons",
+                "artifactId": "commons-parent",
+                "version": "85",
+                "resolved": "https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/85/commons-parent-85.pom",
+                "repositoryId": "central",
+                "checksumAlgorithm": "SHA-256",
+                "checksum": "d189ff2c0027e96bb65d31e6f227ed2af966169b36af1e973dd5ba08926dc7b5",
+                "parent": {
+                  "groupId": "org.apache",
+                  "artifactId": "apache",
+                  "version": "35",
+                  "resolved": "https://repo.maven.apache.org/maven2/org/apache/apache/35/apache-35.pom",
+                  "repositoryId": "central",
+                  "checksumAlgorithm": "SHA-256",
+                  "checksum": "ea297dcd114136e8b8e8b630230d52a76c2fc69f6c5db25d672b1857000728b8"
+                },
+                "boms": [
+                  {
+                    "groupId": "org.junit",
+                    "artifactId": "junit-bom",
+                    "version": "5.13.1",
+                    "resolved": "https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.13.1/junit-bom-5.13.1.pom",
+                    "repositoryId": "central",
+                    "checksumAlgorithm": "SHA-256",
+                    "checksum": "fa68451ea830572ed43ffe51d75b6a05f7a5e665a602a51f49d6be02063a65f3"
+                  }
+                ]
+              },
+              "selectedVersion": "1.28.0",
+              "included": true,
+              "id": "org.apache.commons:commons-compress:1.28.0",
+              "parent": "org.testcontainers:testcontainers:2.0.5",
+              "children": [
+                {
+                  "groupId": "commons-codec",
+                  "artifactId": "commons-codec",
+                  "version": "1.19.0",
+                  "checksumAlgorithm": "SHA-256",
+                  "checksum": "5c3881e4f556855e9c532927ee0c9dfde94cc66760d5805c031a59887070af5f",
+                  "scope": "test",
+                  "resolved": "https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.19.0/commons-codec-1.19.0.jar",
+                  "repositoryId": "central",
+                  "parentPom": {
+                    "groupId": "org.apache.commons",
+                    "artifactId": "commons-parent",
+                    "version": "85",
+                    "resolved": "https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/85/commons-parent-85.pom",
+                    "repositoryId": "central",
+                    "checksumAlgorithm": "SHA-256",
+                    "checksum": "d189ff2c0027e96bb65d31e6f227ed2af966169b36af1e973dd5ba08926dc7b5",
+                    "parent": {
+                      "groupId": "org.apache",
+                      "artifactId": "apache",
+                      "version": "35",
+                      "resolved": "https://repo.maven.apache.org/maven2/org/apache/apache/35/apache-35.pom",
+                      "repositoryId": "central",
+                      "checksumAlgorithm": "SHA-256",
+                      "checksum": "ea297dcd114136e8b8e8b630230d52a76c2fc69f6c5db25d672b1857000728b8"
+                    },
+                    "boms": [
+                      {
+                        "groupId": "org.junit",
+                        "artifactId": "junit-bom",
+                        "version": "5.13.1",
+                        "resolved": "https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.13.1/junit-bom-5.13.1.pom",
+                        "repositoryId": "central",
+                        "checksumAlgorithm": "SHA-256",
+                        "checksum": "fa68451ea830572ed43ffe51d75b6a05f7a5e665a602a51f49d6be02063a65f3"
+                      }
+                    ]
+                  },
+                  "selectedVersion": "1.19.0",
+                  "included": true,
+                  "id": "commons-codec:commons-codec:1.19.0",
+                  "parent": "org.apache.commons:commons-compress:1.28.0",
+                  "children": [],
+                  "boms": []
+                },
+                {
+                  "groupId": "commons-io",
+                  "artifactId": "commons-io",
+                  "version": "2.20.0",
+                  "checksumAlgorithm": "SHA-256",
+                  "checksum": "df90bba0fe3cb586b7f164e78fe8f8f4da3f2dd5c27fa645f888100ccc25dd72",
+                  "scope": "test",
+                  "resolved": "https://repo.maven.apache.org/maven2/commons-io/commons-io/2.20.0/commons-io-2.20.0.jar",
+                  "repositoryId": "central",
+                  "parentPom": {
+                    "groupId": "org.apache.commons",
+                    "artifactId": "commons-parent",
+                    "version": "85",
+                    "resolved": "https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/85/commons-parent-85.pom",
+                    "repositoryId": "central",
+                    "checksumAlgorithm": "SHA-256",
+                    "checksum": "d189ff2c0027e96bb65d31e6f227ed2af966169b36af1e973dd5ba08926dc7b5",
+                    "parent": {
+                      "groupId": "org.apache",
+                      "artifactId": "apache",
+                      "version": "35",
+                      "resolved": "https://repo.maven.apache.org/maven2/org/apache/apache/35/apache-35.pom",
+                      "repositoryId": "central",
+                      "checksumAlgorithm": "SHA-256",
+                      "checksum": "ea297dcd114136e8b8e8b630230d52a76c2fc69f6c5db25d672b1857000728b8"
+                    },
+                    "boms": [
+                      {
+                        "groupId": "org.junit",
+                        "artifactId": "junit-bom",
+                        "version": "5.13.1",
+                        "resolved": "https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.13.1/junit-bom-5.13.1.pom",
+                        "repositoryId": "central",
+                        "checksumAlgorithm": "SHA-256",
+                        "checksum": "fa68451ea830572ed43ffe51d75b6a05f7a5e665a602a51f49d6be02063a65f3"
+                      }
+                    ]
+                  },
+                  "selectedVersion": "2.20.0",
+                  "included": true,
+                  "id": "commons-io:commons-io:2.20.0",
+                  "parent": "org.apache.commons:commons-compress:1.28.0",
+                  "children": [],
+                  "boms": []
+                },
+                {
+                  "groupId": "org.apache.commons",
+                  "artifactId": "commons-lang3",
+                  "version": "3.18.0",
+                  "checksumAlgorithm": "SHA-256",
+                  "checksum": "4eeeae8d20c078abb64b015ec158add383ac581571cddc45c68f0c9ae0230720",
+                  "scope": "test",
+                  "resolved": "https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.18.0/commons-lang3-3.18.0.jar",
+                  "repositoryId": "central",
+                  "parentPom": {
+                    "groupId": "org.apache.commons",
+                    "artifactId": "commons-parent",
+                    "version": "85",
+                    "resolved": "https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/85/commons-parent-85.pom",
+                    "repositoryId": "central",
+                    "checksumAlgorithm": "SHA-256",
+                    "checksum": "d189ff2c0027e96bb65d31e6f227ed2af966169b36af1e973dd5ba08926dc7b5",
+                    "parent": {
+                      "groupId": "org.apache",
+                      "artifactId": "apache",
+                      "version": "35",
+                      "resolved": "https://repo.maven.apache.org/maven2/org/apache/apache/35/apache-35.pom",
+                      "repositoryId": "central",
+                      "checksumAlgorithm": "SHA-256",
+                      "checksum": "ea297dcd114136e8b8e8b630230d52a76c2fc69f6c5db25d672b1857000728b8"
+                    },
+                    "boms": [
+                      {
+                        "groupId": "org.junit",
+                        "artifactId": "junit-bom",
+                        "version": "5.13.1",
+                        "resolved": "https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.13.1/junit-bom-5.13.1.pom",
+                        "repositoryId": "central",
+                        "checksumAlgorithm": "SHA-256",
+                        "checksum": "fa68451ea830572ed43ffe51d75b6a05f7a5e665a602a51f49d6be02063a65f3"
+                      }
+                    ]
+                  },
+                  "selectedVersion": "3.18.0",
+                  "included": true,
+                  "id": "org.apache.commons:commons-lang3:3.18.0",
+                  "parent": "org.apache.commons:commons-compress:1.28.0",
+                  "children": [],
+                  "boms": []
+                }
+              ],
+              "boms": []
+            },
+            {
+              "groupId": "org.rnorth.duct-tape",
+              "artifactId": "duct-tape",
+              "version": "1.0.8",
+              "checksumAlgorithm": "SHA-256",
+              "checksum": "31cef12ddec979d1f86d7cf708c41a17da523d05c685fd6642e9d0b2addb7240",
+              "scope": "test",
+              "resolved": "https://repo.maven.apache.org/maven2/org/rnorth/duct-tape/duct-tape/1.0.8/duct-tape-1.0.8.jar",
+              "repositoryId": "central",
+              "selectedVersion": "1.0.8",
+              "included": true,
+              "id": "org.rnorth.duct-tape:duct-tape:1.0.8",
+              "parent": "org.testcontainers:testcontainers:2.0.5",
+              "children": [
+                {
+                  "groupId": "org.jetbrains",
+                  "artifactId": "annotations",
+                  "version": "17.0.0",
+                  "checksumAlgorithm": "SHA-256",
+                  "checksum": "195fb0da046d55bb042e91543484cf1da68b02bb7afbfe031f229e45ac84b3f2",
+                  "scope": "test",
+                  "resolved": "https://repo.maven.apache.org/maven2/org/jetbrains/annotations/17.0.0/annotations-17.0.0.jar",
+                  "repositoryId": "central",
+                  "selectedVersion": "17.0.0",
+                  "included": true,
+                  "id": "org.jetbrains:annotations:17.0.0",
+                  "parent": "org.rnorth.duct-tape:duct-tape:1.0.8",
+                  "children": [],
+                  "boms": []
+                }
+              ],
+              "boms": []
+            },
+            {
+              "groupId": "org.slf4j",
+              "artifactId": "slf4j-api",
+              "version": "1.7.36",
+              "checksumAlgorithm": "SHA-256",
+              "checksum": "d3ef575e3e4979678dc01bf1dcce51021493b4d11fb7f1be8ad982877c16a1c0",
+              "scope": "test",
+              "resolved": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar",
+              "repositoryId": "central",
+              "parentPom": {
+                "groupId": "org.slf4j",
+                "artifactId": "slf4j-parent",
+                "version": "1.7.36",
+                "resolved": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.7.36/slf4j-parent-1.7.36.pom",
+                "repositoryId": "central",
+                "checksumAlgorithm": "SHA-256",
+                "checksum": "bb388d37fbcdd3cde64c3cede21838693218dc451f04040c5df360a78ed7e812"
+              },
+              "selectedVersion": "1.7.36",
+              "included": true,
+              "id": "org.slf4j:slf4j-api:1.7.36",
+              "parent": "org.testcontainers:testcontainers:2.0.5",
+              "children": [],
+              "boms": []
+            }
+          ],
+          "boms": []
+        }
+      ],
+      "boms": []
+    },
+    {
+      "groupId": "org.testcontainers",
+      "artifactId": "testcontainers-postgresql",
+      "version": "2.0.5",
+      "checksumAlgorithm": "SHA-256",
+      "checksum": "8dbfb2fda977eb813ed1188ce02f098b8b634910eeab220568d54d6bd5b7ce9f",
+      "scope": "test",
+      "resolved": "https://repo.maven.apache.org/maven2/org/testcontainers/testcontainers-postgresql/2.0.5/testcontainers-postgresql-2.0.5.jar",
+      "repositoryId": "central",
+      "selectedVersion": "2.0.5",
+      "included": true,
+      "id": "org.testcontainers:testcontainers-postgresql:2.0.5",
+      "children": [
+        {
+          "groupId": "org.testcontainers",
+          "artifactId": "testcontainers-jdbc",
+          "version": "2.0.5",
+          "checksumAlgorithm": "SHA-256",
+          "checksum": "0f7fe603a32692c33739cf99d638206f9060ca47615bf0141ca2eb32d33d764a",
+          "scope": "test",
+          "resolved": "https://repo.maven.apache.org/maven2/org/testcontainers/testcontainers-jdbc/2.0.5/testcontainers-jdbc-2.0.5.jar",
+          "repositoryId": "central",
+          "selectedVersion": "2.0.5",
+          "included": true,
+          "id": "org.testcontainers:testcontainers-jdbc:2.0.5",
+          "parent": "org.testcontainers:testcontainers-postgresql:2.0.5",
+          "children": [
+            {
+              "groupId": "org.testcontainers",
+              "artifactId": "testcontainers-database-commons",
+              "version": "2.0.5",
+              "checksumAlgorithm": "SHA-256",
+              "checksum": "0ebbc62bdcfb315cb840a63fbaa148b455927666d9034b5e5c00009d84c755b0",
+              "scope": "test",
+              "resolved": "https://repo.maven.apache.org/maven2/org/testcontainers/testcontainers-database-commons/2.0.5/testcontainers-database-commons-2.0.5.jar",
+              "repositoryId": "central",
+              "selectedVersion": "2.0.5",
+              "included": true,
+              "id": "org.testcontainers:testcontainers-database-commons:2.0.5",
+              "parent": "org.testcontainers:testcontainers-jdbc:2.0.5",
+              "children": [
+                {
+                  "groupId": "org.testcontainers",
+                  "artifactId": "testcontainers",
+                  "version": "2.0.5",
+                  "checksumAlgorithm": "SHA-256",
+                  "checksum": "0466f481343d5f350a91274cd7bf984308cbaf90d706247fd1cf4b1a8010c2e1",
+                  "scope": "test",
+                  "resolved": "https://repo.maven.apache.org/maven2/org/testcontainers/testcontainers/2.0.5/testcontainers-2.0.5.jar",
+                  "repositoryId": "central",
+                  "selectedVersion": "2.0.5",
+                  "included": false,
+                  "id": "org.testcontainers:testcontainers:2.0.5",
+                  "parent": "org.testcontainers:testcontainers-database-commons:2.0.5",
+                  "children": [],
+                  "boms": []
+                }
+              ],
+              "boms": []
+            }
+          ],
+          "boms": []
+        }
+      ],
+      "boms": []
+    }
+  ],
+  "mavenPlugins": [],
+  "mavenExtensions": [],
+  "metaData": {
+    "environment": {
+      "osName": "Mac OS X",
+      "mavenVersion": "3.9.15",
+      "javaVersion": "25.0.2"
+    },
+    "config": {
+      "includeMavenPlugins": false,
+      "allowValidationFailure": false,
+      "allowPomValidationFailure": false,
+      "allowEnvironmentalValidationFailure": false,
+      "includeEnvironment": true,
+      "reduced": false,
+      "mavenLockfileVersion": "5.16.1-beta-2",
+      "checksumMode": "remote",
+      "checksumAlgorithm": "SHA-256"
+    }
+  },
+  "boms": [
+    {
+      "groupId": "org.junit",
+      "artifactId": "junit-bom",
+      "version": "6.0.3",
+      "resolved": "https://repo.maven.apache.org/maven2/org/junit/junit-bom/6.0.3/junit-bom-6.0.3.pom",
+      "repositoryId": "central",
+      "checksumAlgorithm": "SHA-256",
+      "checksum": "a655b6a5dc00d1bebc91fb2b15c0c7e8aeac9d6bdcf879595505370e27530287"
+    }
+  ]
+}
